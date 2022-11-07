@@ -38,7 +38,6 @@ const getWeather = async (baseURL, zip, apiKey) => {
     }))
     try {
         const responseJson = await response.json()
-        // console.log(responseJson);
         return responseJson;
     } catch (error) {
         console.log("error", error)
@@ -61,7 +60,6 @@ const postData = async (url = '', data = {}) => {
     })
     try {
         const newData = await response.json();
-        console.log("newData is: ", newData)
         return newData;
     }
     catch (error) {
@@ -74,8 +72,6 @@ const updateUI = async () => {
     try {
         // Transform into JSON 
         const allData = await request.json()
-        console.log(allData)
-        // show icons on the page
         // updated data to DOM elements
         document.getElementById('date').innerHTML = allData.date;
         document.getElementById('temp').innerHTML = Math.round(allData.temp) + 'degrees';
