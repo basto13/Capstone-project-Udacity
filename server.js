@@ -32,30 +32,35 @@ function listening() {
     return true
 }
 
-//get function 
+// POST route
 
-app.get('/getData', sendData);
+// app.post('/add', addWeather);
 
-function sendData(request, response) {
-    response.send(projectData);
-}
+// function addWeather(req,res){
+//     console.log(req.body)
+//     newEntry={
+//         date: req.body.date,
+//         temp: req.body.temp,
+//         feelings: req.body.feelings,
+//     }
+//     projectData.push(newEntry)
+//     res.send(projectData)
+//     console.log(projectData)
+// }
 
-//post function
-
-app.post('/addData', addData);
-
-function addData(request, response) {
-    let data = request.body;
-
-    console.log('server side data', data)
-
-    //date
-    //temp - temperature
-    //feelings - user's impact
-
-    projectData['data'] = data.date;
+app.post('/add', async (req, res) => {
+    const data = await req.body;
+    console.log("server side data posted", data);
+    projectData['date'] = data.date;
     projectData['temp'] = data.temp;
-    projectData['feel'] = data.feeling;
+    projectData['feelings'] = data.feelings;
+    res.send(projectData);
+});
 
-    response.send(projectData);
-}
+// GET route 
+app.get("/all", async (req, res) => {
+    if (projectData) {
+        res.send(projectData);
+    }
+});
+
