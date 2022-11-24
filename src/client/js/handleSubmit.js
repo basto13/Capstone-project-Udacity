@@ -1,6 +1,78 @@
+
+
 function handleSubmit(event){
     console.log("button is clicked");
     return 5;
 };
 
 export {handleSubmit};
+
+document.getElementById('generate').addEventListener('click', performAction);
+
+async function performAction(e) {
+    e.preventDefault();
+    // get input values
+    const feelings = document.getElementById('feelings').value;
+    const zip = document.getElementById('zip').value;
+    //call function to get Web API Data
+    getWeather(baseURL, zip, apiKey)
+        // add data to post request
+        .then(function (data) {
+            postData('/add', { date, temp: data.main.temp, feelings })
+                // update UI in browser
+                .then(function () {
+                    updateUI();
+                })
+        })
+}
+
+const getWeather = async (baseURL, zip, apiKey) => {
+    const response = await fetch(baseURL + new URLSearchParams({
+        zip: zip,
+        appid: apiKey
+    }))
+    try {
+        const responseJson = await response.json()
+        return responseJson;
+    } catch (error) {
+        console.log("error", error)
+    }
+}
+
+// client's side function to post data 
+const postData = async (url = '', data = {}) => {
+    const response = await fetch(url, {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            date: data.date,
+            temp: data.temp,
+            feelings: data.feelings,
+        })
+    })
+    try {
+        const newData = await response.json();
+        return newData;
+    }
+    catch (error) {
+        console.log("error", error);
+    }
+};
+
+const updateUI = async () => {
+    const request = await fetch('/all');
+    try {
+        // Transform into JSON 
+        const allData = await request.json()
+        // updated data to DOM elements
+        document.getElementById('date').innerHTML = allData.date;
+        document.getElementById('temp').innerHTML = Math.round(allData.temp) + 'degrees';
+        document.getElementById('content').innerHTML = allData.feelings;
+    }
+    catch (error) {
+        console.log("error", error);
+    }
+};
