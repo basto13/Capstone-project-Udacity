@@ -15,10 +15,12 @@ const cors = require('cors');
 app.use(cors());
 
 // Initialize the main project folder
-app.use(express.static('website'));
+app.use(express.static('dist'));
+
+console.log(__dirname)
 
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
+// projectData = {};
 
 // Setup Server
 const port = 3000;
@@ -32,35 +34,17 @@ function listening() {
     return true
 }
 
-// POST route
-
-// app.post('/add', addWeather);
-
-// function addWeather(req,res){
-//     console.log(req.body)
-//     newEntry={
-//         date: req.body.date,
-//         temp: req.body.temp,
-//         feelings: req.body.feelings,
-//     }
-//     projectData.push(newEntry)
-//     res.send(projectData)
-//     console.log(projectData)
-// }
-
-app.post('/add', async (req, res) => {
-    const data = await req.body;
-    console.log("server side data posted", data);
-    projectData['date'] = data.date;
-    projectData['temp'] = data.temp;
-    projectData['feelings'] = data.feelings;
-    res.send(projectData);
-});
-
 // GET route 
-app.get("/all", async (req, res) => {
-    if (projectData) {
-        res.send(projectData);
-    }
-});
+// app.get("/all", async (req, res) => {
+//     if (projectData) {
+//         res.send(projectData);
+//     }
+// });
 
+app.get('/', function (req, res) {
+    res.sendFile('dist/index.html')
+})
+
+app.get('/test', function (req, res) {
+    res.send(mockAPIResponse)
+})
