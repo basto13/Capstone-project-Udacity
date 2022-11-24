@@ -7,6 +7,11 @@ module.exports = {
     entry: './src/client/index.js',
     mode: 'development',
     devtool: 'source-map',
+    output: {
+        clean: true
+    //     libraryTarget: 'var',
+    //     library: 'Client'
+    },
     module: {
         rules: [
             {
@@ -14,10 +19,6 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
-            // {
-            //     test: /\.scss$/,
-            //     use: ['style-loader', 'css-loader', 'sass-loader']
-            // },
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,

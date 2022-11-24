@@ -34,13 +34,6 @@ function listening() {
     return true
 }
 
-// GET route 
-// app.get("/all", async (req, res) => {
-//     if (projectData) {
-//         res.send(projectData);
-//     }
-// });
-
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })

@@ -5,6 +5,10 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 module.exports = {
     entry: './src/client/index.js',
     mode: 'production',
+    // output: {
+    //     libraryTarget: 'var',
+    //     library: 'Client'
+    // },
     module: {
         rules: [
             {
@@ -14,8 +18,9 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
-        }
+                exclude: /node_modules/,
+                use: [{ loader: 'style-loader', }, { loader: 'css-loader', options: { sourceMap: true, }, }, { loader: 'sass-loader', options: { sourceMap: true, }, },],
+            }
         ]
     },
     plugins: [
