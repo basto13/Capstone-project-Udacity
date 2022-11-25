@@ -25,6 +25,8 @@ console.log(__dirname)
 // Setup Server
 const port = 3000;
 
+const projectData = {};
+
 //Spin up the server
 const server = app.listen(port, listening);
 //callback to debug
@@ -41,3 +43,26 @@ app.get('/', function (req, res) {
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
+
+// GET route 
+app.get("/all", async (req, res) => {
+    if (projectData) {
+        res.send(projectData);
+    }
+});
+
+app.post('/addLocation', async (req, res) => {
+    const data = await req.body;
+    console.log("server side location data posted", data);
+    projectData['date'] = data.date;
+    projectData['city'] = data.city;
+    projectData['country'] = data.country;
+    res.send(projectData);
+});
+
+app.post('/addWeather', async (req, res) => {
+    const data = await req.body;
+    projectData['temp'] = data.temp;
+    console.log("server side Weather data posted", data);
+    res.send(projectData);
+});
