@@ -57,6 +57,7 @@ app.post('/addLocation', async (req, res) => {
     projectData['date'] = data.date;
     projectData['city'] = data.city;
     projectData['country'] = data.country;
+    projectData['notes'] = data.notes;
     res.send(projectData);
 });
 
@@ -64,5 +65,12 @@ app.post('/addWeather', async (req, res) => {
     const data = await req.body;
     projectData['temp'] = data.temp;
     console.log("server side Weather data posted", data);
+    res.send(projectData);
+});
+
+app.post('/addImage', async (req, res) => {
+    const data = await req.body;
+    projectData['imageURL'] = data.imageURL;
+    console.log("server side Image data posted", data);
     res.send(projectData);
 });

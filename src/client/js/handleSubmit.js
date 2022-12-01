@@ -31,7 +31,6 @@ function submitAction(event) {
             const lng = data.geonames[0].lng;
             const cityName = data.geonames[0].name;
             const countryName = data.geonames[0].countryName;
-            console.log('lat', lat, 'lng', lng, 'city', cityName, 'country', countryName)
             // post location data
             postData('/addLocation', { date, city: cityName, country: countryName, notes })
             // call function to get Web API Weather Data
@@ -39,16 +38,27 @@ function submitAction(event) {
                 // add data to post request
                 .then(function (data) {
                     const temp = data.data[0].temp
-                    console.log('temp', temp)
                     postData('/addWeather', { temp: temp })
+                    // call function to get Web API Image URL
                     getImage(pixaBayURL, city, pixaBayKey)
-                    
+                        .then(function (data) {
+                            if (data.hits.length > 0){
+                                const imageURL = data.hits[0].webformatURL;
+                                postData('/addImage', { imageURL: imageURL })
+                            }
+                            else{
+                                getImage(pixaBayURL, countryName, pixaBayKey)
+                                debugger
+                                const imageURL = data.hits[0].webformatURL;
+                                postData('/addImage', { imageURL: imageURL })
+                            }
+                        })
+                        // update UI in browser
+                        .then(function () {
+                            updateUI();
+                        })
                 })
-                
-                // update UI in browser
-                .then(function () {
-                    updateUI();
-                })
+
         })
 };
 
@@ -60,8 +70,6 @@ const getWeather = async (baseURL, lat, lng, keyURL) => {
     }))
     try {
         const responseJson = await response.json()
-        console.log(responseJson)
-        console.log("success")
         return responseJson;
     } catch (error) {
         console.log("error", error)
@@ -79,34 +87,33 @@ const getCoordinates = async (geoURL, city, geoKey) => {
     } catch (error) {
         console.log("error", error)
     }
-    await
-        postData('/addLocation', { date, city: cityName, country: countryName, notes })
 }
 
-const getImage = async (baseURL, city, keyURL) => {
+const getImage = async (baseURL, location, keyURL) => {
     const response = await fetch(baseURL + new URLSearchParams({
         key: keyURL,
-        q: city
+        q: location
     }))
     try {
         const responseJson = await response.json()
-        const image = responseJson.hits[0].webformatURL;
-        console.log(image)
-        console.log("image success")
         return responseJson;
     } catch (error) {
         console.log("error", error)
     }
 }
 
-
 const updateUI = async () => {
     const request = await fetch('/all');
     try {
         // Transform into JSON 
         const allData = await request.json()
-        // updated data to DOM elements      
-        document.getElementById('notes').innerHTML = allData.notes;
+        // updated data to DOM elements  
+        document.getElementById('cityName').innerHTML = `I would like to visit: ${allData.city}`;
+        document.getElementById('startDate').innerHTML = `My trip starts at ${allData.date}`;
+        document.getElementById('temp').innerHTML = `The temperature is ${allData.temp}`;
+        document.getElementById('content').innerHTML = `My notes about the trip: ${allData.notes}`;
+        document.getElementById('image').setAttribute('src', allData.imageURL);
+
     }
     catch (error) {
         console.log("error", error);
