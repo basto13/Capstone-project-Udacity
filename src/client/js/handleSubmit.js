@@ -1,8 +1,6 @@
 // import {updateUI} from './updateUI'
 import { postData } from './postData'
 
-document.getElementById('submit').addEventListener('click', submitAction);
-
 //Integrating OpenWeatherMap API
 const baseURL = 'http://api.openweathermap.org/data/2.5/weather?';
 // Personal API Key for OpenWeatherMap API
@@ -40,18 +38,10 @@ function submitAction(event) {
                     const temp = data.data[0].temp
                     postData('/addWeather', { temp: temp })
                     // call function to get Web API Image URL
-                    getImage(pixaBayURL, city, pixaBayKey)
+                    getLocationImage(pixaBayURL, city, countryName, pixaBayKey)
                         .then(function (data) {
-                            if (data.hits.length > 0){
                                 const imageURL = data.hits[0].webformatURL;
                                 postData('/addImage', { imageURL: imageURL })
-                            }
-                            else{
-                                getImage(pixaBayURL, countryName, pixaBayKey)
-                                debugger
-                                const imageURL = data.hits[0].webformatURL;
-                                postData('/addImage', { imageURL: imageURL })
-                            }
                         })
                         // update UI in browser
                         .then(function () {
@@ -87,6 +77,12 @@ const getCoordinates = async (geoURL, city, geoKey) => {
     } catch (error) {
         console.log("error", error)
     }
+}
+
+const getLocationImage = async (baseURL, city, country, keyURL) => {
+    const image = await getImage(baseURL, city, keyURL)
+    if (image.totalHits > 0){return image}
+    return await getImage(baseURL, country, keyURL)
 }
 
 const getImage = async (baseURL, location, keyURL) => {

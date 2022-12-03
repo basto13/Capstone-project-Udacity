@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Travel App</title>
-<!-- <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet"> -->
+  <meta charset="UTF-8">
+  <title>Travel App</title>
 </head>
- <body>
-<div id = "app">
-  <div class ="holder headline">
-    Travel App
-  </div>
-  <!-- new code -->
-  <div class ="holder location">
-    <label for="location">Place to visit</label>
-    <input type="text" id="location" placeholder="enter location here">
-  </div>
-  <div class="date">
-    <label for="date">Date</label>
-    <input type="date" id="date" placeholder="Enter the date">
-  </div>
-  <!-- new code -->
-  <div class ="holder notes">
-    <label for="notes">Add your notes</label>
-    <textarea class= "myInput" id="notes" placeholder="Enter your notes here" rows="9" cols="50"></textarea>
-    <button id="submit" type = "submit"> Submit request </button>
-  </div>
-  <!-- new code -->
-  <div class ="trip info">
-    <div class = "title">Information about the trip</div>
-   <div id = "entryHolder">
-    <div id="cityName"></div>
-    <div id = "startDate"></div> 
-   <div id = "temp"></div>
-   <div id = "content"></div>
-   <img id = "image"/>
-  </div>
-  </div>
-  </div>
 
-
+<body>
+  <div id="app">
+    <div class="holder headline">
+      Travel App
+    </div>
+    <div class="holder location">
+      <label for="location">Place to visit</label>
+      <input type="text" id="location" placeholder="enter location here">
+    </div>
+    <div class="date">
+      <label for="date">Date</label>
+      <input type="date" id="date" placeholder="Enter the date">
+    </div>
+    <div class="holder notes">
+      <label for="notes">Add your notes</label>
+      <textarea class="myInput" id="notes" placeholder="Enter your notes here" rows="9" cols="50"></textarea>
+      <button id="submit" type="submit"> Submit request </button>
+    </div>
+    <div class="trip info">
+      <div class="title">Information about the trip</div>
+      <div id="entryHolder">
+        <div id="cityName"></div>
+        <div id="startDate"></div>
+        <div id="temp"></div>
+        <div id="content"></div>
+        <img id="image" />
+      </div>
+    </div>
+  </div>
+  <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+      // Use the window load event to keep the page load performant
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+        .then(registration =>console.log("Service worker registered",registration))
+      });
+    }
+  </script>
 </body>
+
 </html>
