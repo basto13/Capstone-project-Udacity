@@ -44,12 +44,14 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-// GET route 
-app.get("/all", async (req, res) => {
+const getAll = async (req, res) => {
     if (projectData) {
         res.send(projectData);
     }
-});
+}
+
+// GET route 
+app.get("/all", getAll);
 
 app.post('/addLocation', async (req, res) => {
     const data = await req.body;
@@ -74,3 +76,5 @@ app.post('/addImage', async (req, res) => {
     console.log("server side Image data posted", data);
     res.send(projectData);
 });
+
+export {getAll};

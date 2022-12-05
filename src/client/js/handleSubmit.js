@@ -15,6 +15,10 @@ const weatherBitKey = 'accbe321d73d49a29297cf6938accd4a';
 const pixaBayURL = 'https://pixabay.com/api/?';
 const pixaBayKey = '31598097-feff6652b9ef670c811d36bb7';
 
+function sum(){
+    return  {firstName: "Olga"}
+}
+
 function submitAction(event) {
     // get input values
     const notes = document.getElementById('notes').value;
@@ -116,4 +120,4 @@ const updateUI = async () => {
     }
 };
 
-export { submitAction };
+export { submitAction, sum, getImage};

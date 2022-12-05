@@ -1,15 +1,27 @@
 body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    
 }
+
+// body {
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: column;
+//     min-height: 100vh;
+//     // background: center / cover no-repeat url(../img/bgimg.jpg) fixed;
+// }
 
 #app{
     display: grid;
     grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
     height:100vh;
-    background: #f23557;
-    color: #f0d43a;
+    background: #88ead3;
+    color: #f03a7d;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
