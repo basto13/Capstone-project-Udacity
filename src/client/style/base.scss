@@ -7,27 +7,18 @@ body {
 .app {
     display: grid;
     grid-template-rows: auto;
-    grid-template-areas: 
-    "top"
-    "middle"
-    "bottom";
+    grid-template-areas:
+        "top"
+        "middle"
+        "submitButton"
+        "bottom";
     background: #ef9a9d;
 
-    // @media only screen and (max-width: 600px) {
-    //     margin: 0;
-    //     flex-direction: column;
-    // }
-
-    // @media (min-width: 1200px) {
-    //     max-width: 1000px;
-    //     margin: auto;
-    // }
 }
 
-.headline{
+.headline {
     display: flex;
     grid-area: top;
-    // display: block;
     text-align: center;
     font-size: 2em;
     padding: 1em 1em;
@@ -37,36 +28,80 @@ body {
     justify-content: center;
 }
 
-.inputHolder{
+.inputHolder {
     display: grid;
     grid-area: middle;
     padding: 20px;
+    grid-gap: 10px;
     grid-template-columns: 2fr 2fr;
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
-    "location notes"
-    "date notes";
+    grid-template-areas:
+        "location notes"
+        "date notes";
 }
 
-#holderLocation{
+#holderLocation {
     grid-area: location;
 }
-#holderDate{
+
+
+#holderDate {
     grid-area: date;
 }
-#holderNotes{
+
+#holderNotes {
     grid-area: notes;
 }
 
-.holder{
-    // display: flex;
-    width: 250px;
-    height: 150px;
-    border: 1px solid red;
+.holder {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
 }
 
-.resultHolder{
+.submitBtn {
     display: flex;
+    justify-content: center;
+    grid-area: submitButton;
+    padding: 0.5em;
+}
+
+#submit {
+    cursor: pointer;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-radius: 30px;
+    width: 150px;
+    height: 90px;
+    background: #4663c4;
+}
+
+.resultHolder {
+    display: flex;
+    justify-content: center;
     grid-area: bottom;
 }
 
+label {
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+}
+
+input {
+    padding: 0.5em;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    width: auto;
+    background: #adbdf0;
+}
+
+textarea {
+    height: 300px;
+    padding: 0.5em;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    width: 90%;
+    background: #adbdf0;
+}
