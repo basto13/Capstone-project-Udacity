@@ -1,0 +1,72 @@
+body {
+    background: #ef9a9d;
+    line-height: 1;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "top"
+    "middle"
+    "bottom";
+    background: #ef9a9d;
+
+    // @media only screen and (max-width: 600px) {
+    //     margin: 0;
+    //     flex-direction: column;
+    // }
+
+    // @media (min-width: 1200px) {
+    //     max-width: 1000px;
+    //     margin: auto;
+    // }
+}
+
+.headline{
+    display: flex;
+    grid-area: top;
+    // display: block;
+    text-align: center;
+    font-size: 2em;
+    padding: 1em 1em;
+    color: #212122;
+    font-weight: bold;
+    text-transform: uppercase;
+    justify-content: center;
+}
+
+.inputHolder{
+    display: grid;
+    grid-area: middle;
+    padding: 20px;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "location notes"
+    "date notes";
+}
+
+#holderLocation{
+    grid-area: location;
+}
+#holderDate{
+    grid-area: date;
+}
+#holderNotes{
+    grid-area: notes;
+}
+
+.holder{
+    // display: flex;
+    width: 250px;
+    height: 150px;
+    border: 1px solid red;
+}
+
+.resultHolder{
+    display: flex;
+    grid-area: bottom;
+}
+

@@ -1,6 +1,7 @@
 import { submitAction } from './js/handleSubmit'
 import './style/style.scss'
 import './style/fonts.scss'
+import './style/base.scss'
 
 //add event listener (click on button)
 document.getElementById('submit').addEventListener('click', submitAction);
