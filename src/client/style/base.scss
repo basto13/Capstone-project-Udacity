@@ -10,10 +10,9 @@ body {
     grid-template-areas:
         "top"
         "middle"
-        "submitButton"
+        "submit"
         "bottom";
     background: #ef9a9d;
-
 }
 
 .headline {
@@ -28,6 +27,14 @@ body {
     justify-content: center;
 }
 
+.holder {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+}
+
+// input section 
 .inputHolder {
     display: grid;
     grid-area: middle;
@@ -39,35 +46,25 @@ body {
         "location notes"
         "date notes";
 }
-
 #holderLocation {
     grid-area: location;
 }
-
-
 #holderDate {
     grid-area: date;
 }
-
 #holderNotes {
     grid-area: notes;
 }
 
-.holder {
-    display: flex;
-    align-items: center;
-    width: auto;
-    height: auto;
-}
-
-.submitBtn {
+// button
+.submit {
     display: flex;
     justify-content: center;
-    grid-area: submitButton;
+    grid-area: submit;
     padding: 0.5em;
 }
 
-#submit {
+button{
     cursor: pointer;
     font-size: 1.3em;
     font-weight: bold;
@@ -76,6 +73,9 @@ body {
     height: 90px;
     background: #4663c4;
 }
+button:active{background:orange;}
+
+// result section
 
 .resultHolder {
     display: flex;
@@ -83,12 +83,15 @@ body {
     grid-area: bottom;
 }
 
+// names of sections
 label {
     font-weight: bold;
     font-size: 1.2em;
     padding: 10px;
 }
 
+
+// input sections
 input {
     padding: 0.5em;
     font-size: 1em;
