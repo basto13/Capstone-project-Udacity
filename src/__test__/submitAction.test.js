@@ -1,20 +1,10 @@
-// import { sum } from '../client/js/handleSubmit'
-
-const { getImage, sum } = require('../client/js/handleSubmit')
-
-const {getAll} = require('../server/server.js')
-
-// const sum = require(sum)
-
-test("object testing", () =>{
-    expect(sum()).toEqual({firstName: "Olga"})
-})
+const { getImage } = require('../client/js/handleSubmit')
 
 describe('handle submit functions', () => {
     afterEach(() => {
         global.fetch.mockClear();
     });
-    
+
     test('getImage', async () => {
         // Arrange
         const mockJson = {};
@@ -36,11 +26,3 @@ describe('handle submit functions', () => {
         expect(response).toBe(mockJson);
     })
 })
-
-describe('server express functions', () => {
-    test('getAll', async() =>{
-        
-    })
-})
-
-

@@ -77,4 +77,7 @@ app.post('/addImage', async (req, res) => {
     res.send(projectData);
 });
 
-module.exports = {getAll};
+module.exports = {
+    getAll,
+    app
+};
