@@ -37,27 +37,12 @@ function submitAction(event) {
                 .then(function (data) {
                     const temp = data.data[0].temp
                     postData('/addWeather', { temp: temp })
-                        // call function to get Web API Image URL
-
-                        //add test picture
+                    // call function to get Web API Image URL
+                    getLocationImage(pixaBayURL, city, countryName, pixaBayKey)
                         .then(function (data) {
-                            const url = 'https://hips.hearstapps.com/countryliving.cdnds.net/17/47/2048x1365/gallery-1511194376-cavachon-puppy-christmas.jpg?resize=980:*';
-                            postData('/addImage', { imageURL: url })
+                            const imageURL = data.hits[0].webformatURL;
+                            postData('/addImage', { imageURL: imageURL })
                         })
-
-                        //end test picture
-
-
-                        // real API request code
-
-                        // getLocationImage(pixaBayURL, city, countryName, pixaBayKey)
-                        //     .then(function (data) {
-                        //         const imageURL = data.hits[0].webformatURL;
-                        //         postData('/addImage', { imageURL: imageURL })
-                        //     })
-                        
-                        //end of real API request code
-
                         // update UI in browser
                         .then(function () {
                             updateUI();
